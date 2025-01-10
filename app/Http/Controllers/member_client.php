@@ -144,14 +144,13 @@ public function create_user(Request $request)
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'verification' => "NotVerified",
         ]);
         if($new_user)
         {
             $details = [
                 'email' => $request->email,
                 'password' =>$request->password,
-                'Dashboard_Link'=>tenant('id').'.app-link.com'
+                'Dashboard_Link'=>tenant('id').'.app-link.com/user'
 
             ];
         
@@ -235,7 +234,7 @@ public function ReturnCustomQuizes(Request $request,$id){
         return response()->json(["message" => $questions,"QuizName"=>$quiz]); 
     }
 
-    public function UpdateQuiz(Request $request, $id) {
+public function UpdateQuiz(Request $request, $id) {
         // Find the quiz by ID
         $quiz = Quiz::findOrFail($id);
     
@@ -272,9 +271,15 @@ public function ReturnCustomQuizes(Request $request,$id){
         return response()->json(['message' => 'Quiz updated successfully']);
     }
     
+public function AddStudent(Request $request){
+
+}
     
     
     
-    
+
+
+
+
 
 }
