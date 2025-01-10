@@ -13,6 +13,13 @@
 </h4>
 <div>
 <form class="" @submit.prevent="CreateNewUser">
+        <div class="alert alert-success" role="alert" v-if="message.success">
+        {{ message.success }}
+        </div>
+        <div class="alert alert-danger" role="alert"  v-for="error in message.error" :key="error.id">
+        {{ error[0] }}
+        </div>
+        
 <div class="form-row">
 <div class="col-md-6">
 <div class="position-relative form-group">
@@ -83,7 +90,7 @@ Bootstrap based styles across all elements and components
     
 data(){
     return{
-
+        message:{}
     }
 },
 mounted(){
@@ -96,8 +103,22 @@ methods:{
         UserData.name=document.getElementById("exampleName").value;
         UserData.password=document.getElementById("examplePassword").value
         this.$axios.post(this.baseUrl+'create_user',{UserData}).then(Response=>{
-            console.log(Response.data)
-        })
+            if(Response.data.status=='false')
+        {
+            this.message.error=Response.data.message
+            this.message.success=""
+        }
+        else{
+            this.message.success=Response.data.message
+            this.message.error=""
+        }
+
+        }).catch(error => { 
+            // Handle errors if needed 
+        console.error(error);
+        console.error('Error response:', error.response.data.error); 
+         
+        }); 
 
         
     }

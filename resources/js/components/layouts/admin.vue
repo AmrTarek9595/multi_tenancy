@@ -364,7 +364,7 @@
 </router-link>
 </li>
 <li>
-<router-link to="!#" class="">
+<router-link to="/DisplayAllUsers" class="">
 <i class="metismenu-icon"></i>Remove Student
 </router-link>
 </li>

@@ -62,6 +62,7 @@ Route::middleware([
     Route::post('/ReturnAllQuizes',[App\Http\Controllers\member_client::class, 'ReturnAllQuizes']); //لTrue Tested on postman
     Route::post('/ReturnCustomQuizes/{id}',[App\Http\Controllers\member_client::class, 'ReturnCustomQuizes']); //لTrue Tested on postman
     Route::post('/UpdateQuiz/{id}',[App\Http\Controllers\member_client::class, 'UpdateQuiz']); //لTrue Tested on postman
+    Route::post('/DisplayAllUsers',[App\Http\Controllers\member_client::class, 'DisplayAllUsers']); //لTrue Tested on postman
 
     
 });

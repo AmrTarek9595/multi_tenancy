@@ -28,7 +28,7 @@ class member_client extends Controller
     public function __construct()
     {
         // Apply middleware for authentication, except for specified methods
-        $this->middleware('auth:sanctum')->except(['signin', 'create_user']);
+        $this->middleware('auth:sanctum')->except(['signin']);
     
         try {
             // Retrieve the tenant based on the current tenant ID
@@ -126,41 +126,40 @@ class member_client extends Controller
 public function create_user(Request $request)
 {
         // Validate the request
-        $validator = Validator::make($request->all(), [
+        $validator = Validator::make($request->UserData, [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8',
         ]);
 
-        if ($validator->fails()) {
-            if ($validator->fails()) {
-                return response()->json(["message"=>"Some Fields Not valid"]);
-                // return back()->withErrors($validator)->withInput();
-            }
+        if ($validator->fails()) 
+        { 
+            return response()->json([ "message" => $validator->errors(), "status" => "false"]); 
+        
         }
-
         // Insert user into the tenant's database
         $new_user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
+            'name' => $request->UserData['name'],
+            'email' => $request->UserData['email'],
+            'password' => Hash::make($request->UserData['password']),
+            
         ]);
         if($new_user)
         {
             $details = [
-                'email' => $request->email,
-                'password' =>$request->password,
+                'email' => $request->UserData['email'],
+                'password' =>$request->UserData['password'],
                 'Dashboard_Link'=>tenant('id').'.app-link.com/user'
 
             ];
         
-            Mail::to($request->email)->send(new UserNotification($details));
+            // Mail::to($request->UserData['email'])->send(new UserNotification($details));
             // return back()->with('success','now you can login');
-            return response()->json(["message"=>"Your Account has been created"]);
+            return response()->json(["message"=>"Your Account has been created","status"=>"true"]);
         }
         else{
             // return back()->with('error', 'Something went wrong!');
-            return response()->json(['message'=>"Somethng Wrong"]);
+            return response()->json(['message'=>"Somethng Wrong","status"=>"false"]);
         }
 
      
@@ -272,7 +271,12 @@ public function UpdateQuiz(Request $request, $id) {
     }
     
 public function AddStudent(Request $request){
+}
 
+public function DisplayAllUsers(){
+    $Students=User::where('type',0)->get();
+    $Admins=User::where('type',1)->get();
+    return response()->json(["Students"=>$Students,"Admins"=>$Admins]);
 }
     
     
