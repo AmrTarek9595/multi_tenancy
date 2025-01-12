@@ -44,138 +44,7 @@
 
 </div>
 <div class="app-header-right">
-<div class="header-dots">
 
-<div class="dropdown">
-<button type="button" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown" class="p-0 mr-2 btn btn-link">
-<span class="icon-wrapper icon-wrapper-alt rounded-circle">
-<span class="icon-wrapper-bg bg-danger"></span>
-<i class="icon text-danger icon-anim-pulse ion-android-notifications"></i>
-<span class="badge badge-dot badge-dot-sm badge-danger">Notifications</span>
-</span>
-</button>
-<div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu-xl rm-pointers dropdown-menu dropdown-menu-right">
-<div class="dropdown-menu-header mb-0">
-<div class="dropdown-menu-header-inner bg-deep-blue">
-<div class="menu-header-image opacity-1" style="background-image: url('assets/images/dropdown-header/city3.jpg');"></div>
-<div class="menu-header-content text-dark">
-<h5 class="menu-header-title">Notifications</h5>
-<h6 class="menu-header-subtitle">You have <b>21</b> unread messages</h6>
-</div>
-</div>
-</div>
-<ul class="tabs-animated-shadow tabs-animated nav nav-justified tabs-shadow-bordered p-3">
-<li class="nav-item">
-<a role="tab" class="nav-link active" data-toggle="tab" href="#tab-messages-header">
-<span>Messages</span>
-</a>
-</li>
-
-
-
-</ul>
-
-<div class="tab-content">
-<div class="tab-pane active" id="tab-messages-header" role="tabpanel">
-<div class="scroll-area-sm">
-<div class="scrollbar-container">
-<div class="p-3">
-<div class="notifications-box">
-<div class="vertical-time-simple vertical-without-time vertical-timeline vertical-timeline--one-column">
-<div class="vertical-timeline-item dot-danger vertical-timeline-element">
-<div><span class="vertical-timeline-element-icon bounce-in"></span>
-<div class="vertical-timeline-element-content bounce-in">
-<h4 class="timeline-title">All Hands Meeting</h4>
-<span class="vertical-timeline-element-date"></span>
-</div>
-</div>
-</div>
-<div class="vertical-timeline-item dot-warning vertical-timeline-element">
-<div>
-<span class="vertical-timeline-element-icon bounce-in"></span>
-<div class="vertical-timeline-element-content bounce-in">
-<p>Yet another one, at <span class="text-success">15:00 PM</span></p>
-<span class="vertical-timeline-element-date"></span>
-</div>
-</div>
-</div>
-<div class="vertical-timeline-item dot-success vertical-timeline-element">
-<div>
-<span class="vertical-timeline-element-icon bounce-in"></span>
-<div class="vertical-timeline-element-content bounce-in">
-<h4 class="timeline-title">Build the production release
-<span class="badge badge-danger ml-2">NEW</span>
-</h4>
-<span class="vertical-timeline-element-date"></span>
-</div>
-</div>
-</div>
-<div class="vertical-timeline-item dot-primary vertical-timeline-element">
-<div>
-<span class="vertical-timeline-element-icon bounce-in"></span>
-
-</div>
-</div>
-<div class="vertical-timeline-item dot-info vertical-timeline-element">
-<div>
-<span class="vertical-timeline-element-icon bounce-in"></span>
-<div class="vertical-timeline-element-content bounce-in">
-<h4 class="timeline-title">This dot has an info state</h4>
-<span class="vertical-timeline-element-date"></span>
-</div>
-</div>
-</div>
-<div class="vertical-timeline-item dot-danger vertical-timeline-element">
-<div>
-<span class="vertical-timeline-element-icon bounce-in"></span>
-<div class="vertical-timeline-element-content bounce-in">
-<h4 class="timeline-title">All Hands Meeting</h4>
-<span class="vertical-timeline-element-date"></span>
-</div>
-</div>
-</div>
-<div class="vertical-timeline-item dot-warning vertical-timeline-element">
-<div>
-<span class="vertical-timeline-element-icon bounce-in"></span>
-<div class="vertical-timeline-element-content bounce-in">
-<p>Yet another one, at <span class="text-success">15:00 PM</span>
-</p><span class="vertical-timeline-element-date"></span>
-</div>
-</div>
-</div>
-<div class="vertical-timeline-item dot-success vertical-timeline-element">
-<div><span class="vertical-timeline-element-icon bounce-in"></span>
-<div class="vertical-timeline-element-content bounce-in">
-<h4 class="timeline-title">Build the production release
-<span class="badge badge-danger ml-2">NEW</span>
-</h4>
-<span class="vertical-timeline-element-date"></span>
-</div>
-</div>
-</div>
-<div class="vertical-timeline-item dot-dark vertical-timeline-element">
-<div><span class="vertical-timeline-element-icon bounce-in"></span>
-<div class="vertical-timeline-element-content bounce-in">
-<h4 class="timeline-title">This dot has a dark state</h4>
-<span class="vertical-timeline-element-date"></span>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-
-
-</div>
-
-</div>
-</div>
-
-
-</div>
 <div class="header-btn-lg pr-0">
 <div class="widget-content p-0">
 <div class="widget-content-wrapper">
@@ -207,67 +76,17 @@
 </div>
 </div>
 </div>
-<div class="scroll-area-xs" style="height: 150px;">
-<div class="scrollbar-container ps">
-<ul class="nav flex-column">
-<li class="nav-item-header nav-item">Activity</li>
-<li class="nav-item">
-<a href="javascript:void(0);" class="nav-link">Chat
-<div class="ml-auto badge badge-pill badge-info">8</div>
-</a>
-</li>
-<li class="nav-item">
-<a href="javascript:void(0);" class="nav-link">Recover Password</a>
-</li>
-<li class="nav-item-header nav-item">My Account
-</li>
-<li class="nav-item">
-<a href="javascript:void(0);" class="nav-link">Settings
-<div class="ml-auto badge badge-success">New</div>
-</a>
-</li>
-<li class="nav-item">
-<a href="javascript:void(0);" class="nav-link">Messages
-<div class="ml-auto badge badge-warning">512</div>
-</a>
-</li>
-<li class="nav-item">
-<a href="javascript:void(0);" class="nav-link">Logs</a>
-</li>
-</ul>
-</div>
-</div>
-<ul class="nav flex-column">
-<li class="nav-item-divider mb-0 nav-item"></li>
-</ul>
-<div class="grid-menu grid-menu-2col">
-<div class="no-gutters row">
-<div class="col-sm-6">
-<button class="btn-icon-vertical btn-transition btn-transition-alt pt-2 pb-2 btn btn-outline-warning">
-<i class="pe-7s-chat icon-gradient bg-amy-crisp btn-icon-wrapper mb-2"></i> Message Inbox
-</button>
-</div>
-<div class="col-sm-6">
-<button class="btn-icon-vertical btn-transition btn-transition-alt pt-2 pb-2 btn btn-outline-danger">
-<i class="pe-7s-ticket icon-gradient bg-love-kiss btn-icon-wrapper mb-2"></i>
-<b>Support Tickets</b>
-</button>
-</div>
-</div>
-</div>
-<ul class="nav flex-column">
-<li class="nav-item-divider nav-item">
-</li>
-<li class="nav-item-btn text-center nav-item">
-<button class="btn-wide btn btn-primary btn-sm"> Open Messages </button>
-</li>
-</ul>
+
+
+
+
 </div>
 </div>
 </div>
 <div class="widget-content-left  ml-3 header-user-info">
 <div class="widget-heading">{{ user_data.name }}</div>
-<div class="widget-subheading" v-if="user_data.typ=1"> Admin</div>
+<div class="widget-subheading" v-if="user_data.type==1"> Admin</div>
+<div class="widget-subheading" v-if="user_data.type==0"> Student</div>
 
 </div>
 <div class="widget-content-right header-user-info ml-3">
@@ -325,58 +144,28 @@
 </a>
 <ul>
 <li>
-<router-link to="/" class="">
+<router-link to="/user" class="">
 <i class="metismenu-icon"></i>Home
 </router-link>
 </li>
 <li>
-<router-link to="/analytics">
-<i class="metismenu-icon"></i>Analytics
+<router-link to="/user/displayQuizz">
+<i class="metismenu-icon"></i>Quizz
 </router-link>
 </li>
 <li>
 <router-link to="/newQuiz">
 <i class="metismenu-icon">
-</i>Add New Quiz
+</i>Done Quizz
 </router-link>
 </li>
 
-<li>
-<router-link to="/DisplayAllQuizs">
-<i class="metismenu-icon">
-</i>Update Quiz
-</router-link>
-</li>
+
 
 
 
 </ul>
 </li>
-<li class="mm-active">
-<a href="#">
-<i class="metismenu-icon pe-7s-rocket"></i>Students
-<i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
-</a>
-<ul>
-<li>
-<router-link to="/newuser" class="">
-<i class="metismenu-icon"></i>Add New Student
-</router-link>
-</li>
-<li>
-<router-link to="/DisplayAllUsers" class="">
-<i class="metismenu-icon"></i>Edit Students Information
-</router-link>
-</li>
-
-<!-- <li>
-<router-link to="!#" class="">
-<i class="metismenu-icon"></i>Remove
-</router-link>
-</li> -->
-</ul>
-</li>
-
 
 
 </ul>
@@ -442,6 +231,7 @@ export default{
     })
       .then(response => {
         this.user_data=response.data.message;
+        console.log(this.user_data.type)
       })
       .catch(error => {
         console.error('Error fetching user data:', error);

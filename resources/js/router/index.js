@@ -64,7 +64,7 @@ const routes = [
         component: UserHome, 
        },
        {
-        path: '/user/solve', 
+        path: '/user/displayQuizz', 
         name: 'SolveQuiz', 
         component: UserSolve, 
        }

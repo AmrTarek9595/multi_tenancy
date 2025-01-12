@@ -187,7 +187,7 @@ public function create_user(Request $request)
 public function return_current_user_data(Request $request)
 {
 
-     $data=User::first();
+     $data=Auth::User();
      return response()->json(["message"=>$data]);
     
 }
