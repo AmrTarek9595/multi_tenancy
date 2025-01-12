@@ -335,7 +335,7 @@
 </router-link>
 </li>
 <li>
-<router-link to="/NewQuiz">
+<router-link to="/newQuiz">
 <i class="metismenu-icon">
 </i>Add New Quiz
 </router-link>
@@ -418,6 +418,19 @@ export default{
         this.return_data_of_user();
     },
     methods:{
+        // chechk_type_of_user(){
+        //     let userType = localStorage.getItem("type"); 
+        //     if (userType.toLowerCase() === 'user') 
+        //     { 
+        //         this.$router.push("/user"); 
+        //     } 
+        //     else if (userType.toLowerCase() === 'admin') 
+        //     { 
+        //         this.$router.push("/"); 
+        //     }
+
+
+        // },
         chechk_type_of_user(){
             let userType = localStorage.getItem("type"); 
             if (userType.toLowerCase() === 'user') 

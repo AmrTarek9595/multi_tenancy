@@ -26,12 +26,12 @@ const routes = [
        
     },
     {
-    path: '/Analytics',
+    path: '/analytics',
     name: 'Analytics',
     component: Analytics
     },
     {
-    path: '/NewQuiz',
+    path: '/newQuiz',
     name: 'AddQuiz',
     component: AddQuiz
     }, 
@@ -80,7 +80,7 @@ router.beforeEach((to, from, next) =>
     { 
         if (localStorage.getItem('type')=="user" ||localStorage.getItem('type')=="User") { 
 
-                const restrictedPaths = ['/Analytics', '/NewQuiz','/DisplayAllQuizs','/newuser','/DisplayAllUsers']; 
+                const restrictedPaths = ['/analytics', '/newQuiz','/DisplayAllQuizs','/newuser','/DisplayAllUsers']; 
                 if (restrictedPaths.includes(to.path)) { 
                     next(false); 
                     window.location.href="/user"
