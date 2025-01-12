@@ -514,7 +514,7 @@ labore et dolore magna elit enim at minim veniam quis nostrud
 </a>
 </li>
 <li>
-<a href="dashboards-commerce.html">
+<a href="/user/solve">
 <i class="metismenu-icon"></i>Commerce
 </a>
 </li>
@@ -959,7 +959,7 @@ labore et dolore magna elit enim at minim veniam quis nostrud
 
 
 
-
+<!--  -->
 <router-view></router-view>
 
 
@@ -979,27 +979,32 @@ labore et dolore magna elit enim at minim veniam quis nostrud
 
 <script>
 export default{
+    name: 'UserHome',
     data:()=>({
 
     }),
-    mounted(){
-        this.chechk_type_of_user();
-    },
-    methods:{
-        chechk_type_of_user:function(){
-            let userType = localStorage.getItem("type"); 
-            if (userType.toLowerCase() === 'user') 
-            { 
-                this.$router.push("/user"); 
-            } 
-            else if (userType.toLowerCase() === 'admin') 
-            { 
-                this.$router.push("/"); 
-            }
+    mounted() {
+  this.check_type_of_user();
+},
+methods: {
+  check_type_of_user() {
+    let userType = localStorage.getItem("type");
+    let currentPath = this.$route.path;
 
-
-        }
+    if (userType && userType.toLowerCase() === 'User') {
+      if (!currentPath.startsWith('/user')) {
+        this.$router.push("/user");
+      }
+    } else if (userType && userType.toLowerCase() === 'admin') {
+      if (currentPath !== '/') {
+        this.$router.push("/");
+      }
     }
+  }
+
+}
+
+
 }
 
 </script>

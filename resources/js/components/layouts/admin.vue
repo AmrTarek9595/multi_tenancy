@@ -200,7 +200,7 @@
 <div class="widget-subheading opacity-8">A short profile description</div>
 </div>
 <div class="widget-content-right mr-2">
-<button class="btn-pill btn-shadow btn-shine btn btn-focus">Logout</button>
+<button class="btn-pill btn-shadow btn-shine btn btn-focus" @click="logout">Logout</button>
 </div>
 </div>
 </div>
@@ -365,15 +365,15 @@
 </li>
 <li>
 <router-link to="/DisplayAllUsers" class="">
-<i class="metismenu-icon"></i>Remove Student
+<i class="metismenu-icon"></i>Edit Students Information
 </router-link>
 </li>
 
-<li>
+<!-- <li>
 <router-link to="!#" class="">
-<i class="metismenu-icon"></i>Update Student Information
+<i class="metismenu-icon"></i>Remove
 </router-link>
-</li>
+</li> -->
 </ul>
 </li>
 
@@ -414,7 +414,7 @@ export default{
         user_data:{}
     }),
     mounted(){
-        this.chechk_type_of_user();
+        // this.chechk_type_of_user();
         this.return_data_of_user();
     },
     methods:{
@@ -432,7 +432,6 @@ export default{
 
         },
         return_data_of_user() {
-    // Assuming you have a way to access the token (e.g., from Local Storage)
 
     axios.post(this.baseUrl+"return_current_user_data", {
       // Add any data you want to send in the request body
@@ -448,6 +447,17 @@ export default{
         console.error('Error fetching user data:', error);
         // Handle errors appropriately (e.g., unauthorized access, network issues)
       });
+  },
+  logout(){
+   this.$axios.post(this.baseUrl+"logout").then(
+    Response=>{
+      if(Response.data.status=="true")
+    {
+      localStorage.clear();
+      window.location.href='/';
+    }
+    }
+   )
   }
     }
 }

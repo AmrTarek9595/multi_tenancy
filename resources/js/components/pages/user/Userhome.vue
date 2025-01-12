@@ -290,8 +290,8 @@ and I will give you a complete account.</div>
 <script>
 
     export default {
-
-    
+        name:'UserHome',
+        mounted() { console.log('UserHome component mounted'); }
 
 }
 </script>

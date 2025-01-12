@@ -27,9 +27,9 @@ class member_client extends Controller
 {
     public function __construct()
     {
-        // Apply middleware for authentication, except for specified methods
-        $this->middleware('auth:sanctum')->except(['signin']);
-    
+
+            $this->middleware('auth:sanctum')->except(['signin']);
+
         try {
             // Retrieve the tenant based on the current tenant ID
             $tenantId = tenant('id'); // Ensure `tenant()` is properly defined
@@ -82,6 +82,7 @@ class member_client extends Controller
                      'token_type' => 'Bearer',
                      'name'=>$user->name,
                      "email"=>$user->email,
+                     "type"=>$user->type
                 ],
                      "status"=>"Admin"]);
                     // return redirect()->route('home_admin');
@@ -116,7 +117,17 @@ class member_client extends Controller
         //     }
     }
      
-
+    public function logout(Request $request)
+    {
+        // Revoke the token that was used to authenticate the current request
+        $request->user()->currentAccessToken()->delete();
+    
+        return response()->json([
+            "message" => "Logged out successfully",
+        
+            "status"=>"true"]);
+    }
+    
  
 
 /** 
@@ -175,6 +186,7 @@ public function create_user(Request $request)
  */
 public function return_current_user_data(Request $request)
 {
+
      $data=User::first();
      return response()->json(["message"=>$data]);
     
@@ -270,16 +282,100 @@ public function UpdateQuiz(Request $request, $id) {
         return response()->json(['message' => 'Quiz updated successfully']);
     }
     
-public function AddStudent(Request $request){
-}
+
 
 public function DisplayAllUsers(){
+    
+    if(Auth::user()->type==1)
+    {
     $Students=User::where('type',0)->get();
     $Admins=User::where('type',1)->get();
     return response()->json(["Students"=>$Students,"Admins"=>$Admins]);
+    }
 }
+
+public function DisplayCutomUsers($id)
+{
+    $UserData=User::where('id',$id)->get();
+    return response()->json(["message"=>$UserData]);
+}
+
+public function UpdateUserData(Request $request)
+{
+      // Validate the request
+      $validator = Validator::make($request->all(), [
+        'name' => 'required|string|max:255',
+        'email' => 'required|string|email|max:255',
+        'password' => 'string|min:8',
+        ]);
+
+    if ($validator->fails()) 
+    { 
+        return response()->json([ "message" => $validator->errors(), "status" => "false"]); 
     
-    
+    }
+
+        if($request->isAdmin=="true")
+        {
+            if($request->password)
+            {
+                $data=User::where('id',$request->UserID)->update([
+                    'type'=>1,
+                    'name'=>$request->name,
+                    'email'=>$request->email,
+                    'password'=>Hash::make($request->password)
+                ]);
+            
+                return response()->json([ "message" => "Successfully Update","status" => "true"]); 
+                
+            }
+            else
+            {
+                $data=User::where('id',$request->UserID)->update([
+                    'type'=>1,
+                    'name'=>$request->name,
+                    'email'=>$request->email
+                ]);
+            
+                return response()->json([ "message" => "Successfully Update","status" => "true"]); 
+            }
+
+
+        }
+        else{
+            if($request->password)
+            {
+                $data=User::where('id',$request->UserID)->update([
+                    
+                    'name'=>$request->name,
+                    'email'=>$request->email,
+                    'password'=>Hash::make($request->password)
+                ]);
+            
+                return response()->json([ "message" => "Successfully Update","status" => "true"]); 
+                
+            }
+            else
+            {
+                $data=User::where('id',$request->UserID)->update([
+                
+                    'name'=>$request->name,
+                    'email'=>$request->email
+                ]);
+            
+                return response()->json([ "message" => "Successfully Update","status" => "true"]); 
+            }
+
+        }
+
+}
+
+public function DeleteStudent(Request $request,$id){
+
+    $data=User::findOrFail($id);
+    $data->delete();
+    return response()->json(["message"=>"Successfull Delete"]); 
+}
     
 
 

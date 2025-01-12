@@ -15,9 +15,8 @@ import DisplayAllUsers from '../components/pages/auth/displayUsersToAdmin.vue';
 
 
 import UserHome from '../components/pages/user/Userhome.vue';
+import UserSolve from '../components/pages/user/solve.vue';
 
-// Import other components as needed
-const subdomain=localStorage.getItem('subdomain');
 
 const routes = [
     {
@@ -59,11 +58,16 @@ const routes = [
         component: DisplayAllUsers
     },
     
-    {
-    path: '/user',
-    name: 'UserHome',
-    component: UserHome
-    },
+    { 
+        path: '/user', 
+        name: 'UserHome', 
+        component: UserHome, 
+       },
+       {
+        path: '/user/solve', 
+        name: 'SolveQuiz', 
+        component: UserSolve, 
+       }
         
     // Add other routes here
 ];
@@ -72,5 +76,24 @@ const router = createRouter({
     history: createWebHistory(),
     routes,
 });
+router.beforeEach((to, from, next) => 
+    { 
+        if (localStorage.getItem('type')=="user" ||localStorage.getItem('type')=="User") { 
+
+                const restrictedPaths = ['/Analytics', '/NewQuiz','/DisplayAllQuizs','/newuser','/DisplayAllUsers']; 
+                if (restrictedPaths.includes(to.path)) { 
+                    next(false); 
+                    window.location.href="/user"
+                    } 
+                    else 
+                    { 
+                        next();
+                        
+                    } } 
+        else { 
+            next(); 
+        }
+    }
+);// Allow navigation if URL doesn't contain /user
 
 export default router;
