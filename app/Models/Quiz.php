@@ -14,5 +14,6 @@ class Quiz extends Model
     {
         return $this->hasMany(Question::class);
     }
+    public function users() { return $this->belongsToMany(User::class)->withPivot('score')->withTimestamps(); }
     protected $casts = [ 'created_at' => 'date:Y-m-d', ];
 }

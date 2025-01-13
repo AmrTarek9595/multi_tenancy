@@ -17,17 +17,16 @@
             
         @else
         <link href="/main.css" rel="stylesheet">
-         <style>
-                
-         
-         </style>
+      
         @endif
         <link href="/main.css" rel="stylesheet">
     </head>
     <body id="app">
         <example-component ></example-component>
+        
+        <script type="text/javascript" src="/assets/scripts/main.d810cf0ae7f39f28f336.js"></script>
         <script src="/js/app.js"> </script>
-        <script type="text/javascript" src="/assets/scripts/main.d810cf0ae7f39f28f336.js"></script></body>
+    </body>
 
     </body>
 </html>

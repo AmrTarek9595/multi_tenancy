@@ -222,13 +222,7 @@ public function AddQuiz(Request $request){
         $question->answers()->saveMany($answers);
     }
     
-     // Insert multiple answers at once
-
-    // return response()->json(["message" => "Quiz, Question, and Answers created successfully!"]);
-
-
-    // $data->Question()->save($data2);
-    // return response()->json(["message"=>$data]);
+     
 }
 public function ReturnAllQuizes(Request $request){
     
@@ -376,9 +370,28 @@ public function DeleteStudent(Request $request,$id){
     $data->delete();
     return response()->json(["message"=>"Successfull Delete"]); 
 }
-    
 
+/***************************************************************************
+ * ******************Student Area*******************************************
+ * *************************************************************************
+ */
+public function RetriveQuizz(){
+    // if (Auth::user()->type==0)
+    // {       //Where not Solved yet in many-to-many Table
+        $user = Auth::user(); 
+        $userId = Auth::user()->id;
+        $NotSolved = Quiz::whereNotIn('id', function ($query) use ($userId) { $query->select('quiz_id') ->from('quiz_user') ->where('user_id', $userId); })->get();   
+        $Solved = Quiz::join('quiz_user', 'quizs.id', '=', 'quiz_user.quiz_id') ->where('quiz_user.user_id', $user->id) ->select('quizs.*', 'quiz_user.score') ->get(); 
+        return response()->json([ 'user' => $user, 'solved' => $Solved,'notSolved'=>$NotSolved ]);
 
+        // return response()->json(["message"=>$Quizz]);
+    // }
+}
+
+public function GetQuiz($id){
+    $quiz = Quiz::with('Question.answers')->findOrFail($id); 
+    return response()->json(["message" => $quiz]);
+}
 
 
 

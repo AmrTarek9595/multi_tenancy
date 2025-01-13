@@ -5,7 +5,7 @@
  <div class="page-title-icon">
  <i class="pe-7s-car icon-gradient bg-mean-fruit"></i>
  </div>
- <div>User Solve Quiz
+ <div>Analytics Dashboard
  <div class="page-title-subheading">This is an example dashboard created using build-in elements and components.</div>
  </div>
  </div>
@@ -31,13 +31,9 @@
  </div>
  <div class="widget-chart-content">
  <div class="widget-subheading">Cash Deposits</div>
- <div class="widget-numbers">1,7M</div>
+ <div class="widget-numbers">0</div>
  <div class="widget-description opacity-8 text-focus">
- <div class="d-inline text-danger pr-1">
- <i class="fa fa-angle-down"></i>
- <span class="pl-1">54.1%</span>
- </div>
- less earnings
+ 
  </div>
  </div>
  </div>
@@ -51,14 +47,14 @@
  </div>
  <div class="widget-chart-content">
  <div class="widget-subheading">Invested Dividents</div>
- <div class="widget-numbers"><span>9M</span></div>
- <div class="widget-description opacity-8 text-focus">
+ <div class="widget-numbers"><span>0</span></div>
+ <!-- <div class="widget-description opacity-8 text-focus">
  Grow Rate:
  <span class="text-info pl-1">
  <i class="fa fa-angle-down"></i>
  <span class="pl-1">14.1%</span>
  </span>
- </div>
+ </div> -->
  </div>
  </div>
  <div class="divider m-0 d-md-none d-sm-block"></div>
@@ -71,14 +67,14 @@
  </div>
  <div class="widget-chart-content">
  <div class="widget-subheading">Capital Gains</div>
- <div class="widget-numbers text-success"><span>$563</span></div>
- <div class="widget-description text-focus">
+ <div class="widget-numbers text-success"><span>0</span></div>
+ <!-- <div class="widget-description text-focus">
  Increased by
  <span class="text-warning pl-1">
  <i class="fa fa-angle-up"></i>
  <span class="pl-1">7.35%</span>
  </span>
- </div>
+ </div> -->
  </div>
  </div>
  </div>
@@ -290,8 +286,7 @@
  <script>
  
      export default {
- name:'SolveQuiz',
- mounted() { console.log('solve component mounted'); }
+ 
      
  
  }

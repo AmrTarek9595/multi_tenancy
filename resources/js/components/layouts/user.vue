@@ -149,16 +149,16 @@
 </router-link>
 </li>
 <li>
+<router-link to="/user/analytics">
+<i class="metismenu-icon"></i>Analytics
+</router-link>
+</li>
+<li>
 <router-link to="/user/displayQuizz">
 <i class="metismenu-icon"></i>Quizz
 </router-link>
 </li>
-<li>
-<router-link to="/newQuiz">
-<i class="metismenu-icon">
-</i>Done Quizz
-</router-link>
-</li>
+
 
 
 

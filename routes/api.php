@@ -67,8 +67,15 @@ Route::middleware([
     Route::post('/DisplayCutomUsers/{id}',[App\Http\Controllers\member_client::class, 'DisplayCutomUsers']); //لTrue Tested on postman
     Route::post('/UpdateUserData',[App\Http\Controllers\member_client::class, 'UpdateUserData']); //لTrue Tested on postman
     Route::post('/DeleteStudent/{id}',[App\Http\Controllers\member_client::class, 'DeleteStudent']); //لTrue Tested on postman
+/**
+ * **************************
+ * ******Student Area********
+ * **************************
+ *  */
 
-    
+ Route::post('/RetriveQuizz',[App\Http\Controllers\member_client::class, 'RetriveQuizz']); //لTrue Tested on postman
+ Route::post('/GetQuiz/{id}',[App\Http\Controllers\member_client::class, 'GetQuiz']); //لTrue Tested on postman
+
 });
 
 // Route::post('/admin/login',[App\Http\Controllers\member_client::class, 'signin']);

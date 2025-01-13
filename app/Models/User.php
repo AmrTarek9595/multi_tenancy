@@ -56,4 +56,6 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function quizzes() { return $this->belongsToMany(Quiz::class)->withPivot('score')->withTimestamps(); }
 }

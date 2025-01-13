@@ -15,7 +15,8 @@ import DisplayAllUsers from '../components/pages/auth/displayUsersToAdmin.vue';
 
 
 import UserHome from '../components/pages/user/Userhome.vue';
-import UserSolve from '../components/pages/user/solve.vue';
+import UserQuizz from '../components/pages/user/DisplayQuizz.vue';
+import UserAnalytics from '../components/pages/user/analytics.vue';
 
 
 const routes = [
@@ -66,7 +67,12 @@ const routes = [
        {
         path: '/user/displayQuizz', 
         name: 'SolveQuiz', 
-        component: UserSolve, 
+        component: UserQuizz, 
+       },
+       {
+        path: '/user/analytics', 
+        name: 'User Analytics', 
+        component: UserAnalytics, 
        }
         
     // Add other routes here
@@ -80,7 +86,7 @@ router.beforeEach((to, from, next) =>
     { 
         if (localStorage.getItem('type')=="user" ||localStorage.getItem('type')=="User") { 
 
-                const restrictedPaths = ['/analytics', '/newQuiz','/DisplayAllQuizs','/newuser','/DisplayAllUsers']; 
+                const restrictedPaths = ['/','/analytics', '/newQuiz','/DisplayAllQuizs','/newuser','/DisplayAllUsers']; 
                 if (restrictedPaths.includes(to.path)) { 
                     next(false); 
                     window.location.href="/user"
