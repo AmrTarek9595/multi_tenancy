@@ -14,8 +14,9 @@ return new class extends Migration
         Schema::create('quizs', function (Blueprint $table) {
             $table->id();
             $table->text('nameOfQuiz');
-
+            $table->integer('ScoreOfQuiz');
             $table->timestamps();
+
             $table->engine = 'InnoDB';
         });
 

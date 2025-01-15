@@ -30,9 +30,9 @@
 <tr>
 <th>Name</th>
 <th>Published Date</th>
-
-
 <th>Do Now...</th>
+
+<th>Score</th>
 </tr>
 </thead>
 <tbody>
@@ -40,7 +40,7 @@
 <td>{{ QuizzToDo.nameOfQuiz }}</td>
 <td>{{ QuizzToDo.created_at }}</td>
 <td><router-link to="#!" @click="openQuiz(QuizzToDo.id)"><i class="pe-7s-arc"></i></router-link></td>
-
+<td>{{ QuizzToDo.question_count }}</td>
 </tr>
 
 </tbody>
@@ -49,6 +49,8 @@
 <th>Name</th>
 <th>Published Date</th>
 <th>Do Now...</th>
+
+<th>Score</th>
 </tr>
 </tfoot>
 </table>
@@ -65,8 +67,10 @@
 <thead>
 <tr>
 <th>Name</th>
-<th>Date</th>
+<th>Solved Date</th>
 <th>Score</th>
+<th>/of Score</th>
+
 
 </tr>
 </thead>
@@ -76,7 +80,7 @@
 <td>{{ QuizzDone.nameOfQuiz}}</td>
 <td>{{ QuizzDone.created_at}}</td>
 <td>{{ QuizzDone.score}}</td>
-
+<td>{{ QuizzDone.ScoreOfQuiz}}</td>
 </tr>
 
 </tbody>
@@ -85,6 +89,7 @@
 <th>Name</th>
 <th>Date</th>
 <th>Score</th>
+<th>/of Score</th>
 </tr>
 </tfoot>
 </table>
@@ -101,12 +106,12 @@
           <span class="close" @click="closeModal">&times;</span>
           
           <h2>{{ quiz.nameOfQuiz }}</h2>
-          <form @submit.prevent="submitQuiz">
+          <form @submit.prevent="submitQuiz(quiz.id)">
             <div v-for="(question, qIndex) in quiz.question" :key="qIndex" class="mb-3">
               <label class="form-label">Question {{ qIndex + 1 }}</label>
               <div>{{ question.question }}</div>
               <div v-for="(answer, aIndex) in question.answers" :key="aIndex" class="mb-2">
-                <input type="radio" :name="'question' + qIndex" :value="aIndex" v-model="studentAnswers[qIndex]">
+                <input type="radio" :name="'question' + qIndex" :value="aIndex" v-model="studentAnswers[qIndex]" required>
                 {{ answer.answer }}
               </div>
             </div>
@@ -147,6 +152,7 @@
             this.$axios.post(this.baseUrl+"RetriveQuizz").then(Response=>{
                 this.Quizz.Inprogress=Response.data.notSolved;
                 this.Quizz.Completed=Response.data.solved
+                console.log(Response.data)
             })
         },
         openQuiz(quizId) {
@@ -175,17 +181,21 @@ closeModal()
             this.showModal = false; 
 } ,
             
-submitQuiz() 
+submitQuiz(id) 
 { 
                 let score = 0; 
                 this.quiz.question.forEach((question, qIndex) => { 
                     if (question.answers[this.studentAnswers[qIndex]] && question.answers[this.studentAnswers[qIndex]].is_correct) { score += 1; } 
                 }); // Send score to backend 
-                axios.post('your_api_endpoint/SaveScore', { score })
-                //  .then(response => { alert(`Quiz submitted successfully! Your score: ${score}`); 
-                //   this.closeModal(); }) 
-                //   .catch(error => { console.error('Error saving score:', error); }); 
-  console.log(score)
+                this.$axios.post(this.baseUrl+'PostQuizResutl/'+id, { score })
+                 .then(response => 
+                 { 
+                  alert(`Quiz submitted successfully! Your score: ${score}`); 
+                  this.closeModal(); 
+                  this.getQuizz();
+                }) 
+                  .catch(error => { console.error('Error saving score:', error); }); 
+ 
               } 
             }
      

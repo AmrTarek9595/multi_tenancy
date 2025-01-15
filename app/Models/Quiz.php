@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Quiz extends Model
 {
-    protected $fillable=['nameOfQuiz'];
+    protected $fillable=['nameOfQuiz','ScoreOfQuiz'];
     
     protected $table='quizs';
 
@@ -14,6 +14,9 @@ class Quiz extends Model
     {
         return $this->hasMany(Question::class);
     }
-    public function users() { return $this->belongsToMany(User::class)->withPivot('score')->withTimestamps(); }
+    public function users() 
+    { 
+        return $this->belongsToMany(User::class)->withPivot('score')->withTimestamps(); 
+    }
     protected $casts = [ 'created_at' => 'date:Y-m-d', ];
 }

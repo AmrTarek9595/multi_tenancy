@@ -57,5 +57,8 @@ class User extends Authenticatable
         ];
     }
 
-    public function quizzes() { return $this->belongsToMany(Quiz::class)->withPivot('score')->withTimestamps(); }
+    public function quizzes() 
+    { 
+        return $this->belongsToMany(Quiz::class)->withPivot('score')->withTimestamps(); 
+    }
 }

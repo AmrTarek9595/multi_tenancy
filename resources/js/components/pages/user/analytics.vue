@@ -30,8 +30,8 @@
  <i class="lnr-laptop-phone text-dark opacity-8"></i>
  </div>
  <div class="widget-chart-content">
- <div class="widget-subheading">Cash Deposits</div>
- <div class="widget-numbers">0</div>
+ <div class="widget-subheading">Total Quizzes</div>
+ <div class="widget-numbers">{{ Quizz.CountOfSolved.length+Quizz.CountOfUnSolved.length }}</div>
  <div class="widget-description opacity-8 text-focus">
  
  </div>
@@ -46,15 +46,9 @@
  <i class="lnr-graduation-hat text-white"></i>
  </div>
  <div class="widget-chart-content">
- <div class="widget-subheading">Invested Dividents</div>
- <div class="widget-numbers"><span>0</span></div>
- <!-- <div class="widget-description opacity-8 text-focus">
- Grow Rate:
- <span class="text-info pl-1">
- <i class="fa fa-angle-down"></i>
- <span class="pl-1">14.1%</span>
- </span>
- </div> -->
+ <div class="widget-subheading">Completed Quizzes</div>
+ <div class="widget-numbers text-success"><span>{{ Quizz.CountOfSolved.length }}</span></div>
+
  </div>
  </div>
  <div class="divider m-0 d-md-none d-sm-block"></div>
@@ -66,8 +60,8 @@
  <i class="lnr-apartment text-white"></i>
  </div>
  <div class="widget-chart-content">
- <div class="widget-subheading">Capital Gains</div>
- <div class="widget-numbers text-success"><span>0</span></div>
+ <div class="widget-subheading">Unsolved Yet!</div>
+ <div class="widget-numbers"><span>{{ Quizz.CountOfUnSolved.length }}</span></div>
  <!-- <div class="widget-description text-focus">
  Increased by
  <span class="text-warning pl-1">
@@ -89,7 +83,7 @@
  <div class="card-hover-shadow-2x mb-3 card">
  <div class="card-header-tab card-header">
  <div class="card-header-title font-size-lg text-capitalize font-weight-normal">
- <i class="header-icon lnr-database icon-gradient bg-malibu-beach"> </i>Tasks List
+ <i class="header-icon lnr-database icon-gradient bg-malibu-beach"> </i>UnSolved Quizzes
  </div>
  <div class="btn-actions-pane-right text-capitalize actions-icon-btn">
  
@@ -99,37 +93,27 @@
  <div class="scrollbar-container">
  <div class="p-2">
  <ul class="todo-list-wrapper list-group list-group-flush">
- 
- <li class="list-group-item">
+  
+ <li class="list-group-item" v-for="QuizzData in Quizz.CountOfUnSolved" :key="QuizzData.id">
  <div class="todo-indicator bg-focus"></div>
  <div class="widget-content p-0">
  <div class="widget-content-wrapper">
  <div class="widget-content-left mr-2">
  <div class="custom-checkbox custom-control">
- <input type="checkbox" id="exampleCustomCheckbox1" class="custom-control-input">
- <label class="custom-control-label" for="exampleCustomCheckbox1">&nbsp;</label>
  </div>
  </div>
  <div class="widget-content-left">
- <div class="widget-heading">Task with dropdown menu</div>
+ <router-link to="/user/displayQuizz" class="widget-heading">{{ QuizzData.nameOfQuiz }}</router-link>
  <div class="widget-subheading">
- <div>By Johnny
- <div class="badge badge-pill badge-info ml-2">NEW</div>
+ <div>
+ <div class="badge badge-pill badge-info ml-2">{{ QuizzData.created_at }}</div>
  </div>
  </div>
  </div>
  <div class="widget-content-right widget-content-actions">
  <div class="d-inline-block dropdown">
- <button type="button" data-toggle="dropdown" aria-haspopup="true"  aria-expanded="false" class="border-0 btn-transition btn btn-link">
- <i class="fa fa-ellipsis-h"></i>
- </button>
- <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu dropdown-menu-right">
- <h6 tabindex="-1" class="dropdown-header">Header</h6>
- <button type="button" disabled="" tabindex="-1" class="disabled dropdown-item">Action</button>
- <button type="button" tabindex="0" class="dropdown-item">Another Action</button>
- <div tabindex="-1" class="dropdown-divider"></div>
- <button type="button" tabindex="0" class="dropdown-item">Another Action</button>
- </div>
+
+
  </div>
  </div>
  </div>
@@ -146,10 +130,10 @@
  </div>
  </div>
  </div>
- <div class="d-block text-right card-footer">
+ <!-- <div class="d-block text-right card-footer">
  <button class="mr-2 btn btn-link btn-sm">Cancel</button>
  <button class="btn btn-primary">Add Task</button>
- </div>
+ </div> -->
  </div>
  </div>
  <div class="col-sm-12 col-lg-6">
@@ -284,9 +268,33 @@
  </template>
  
  <script>
- 
      export default {
+ data(){
+    return{
+            Quizz:{
+                CountOfSolved:"",
+                CountOfUnSolved:""
+            }
+    }
+ },
+
+ mounted() 
+    {
+    this.getQuizz();
+    },
+
+
+
+        methods:{
+            getQuizz(){
+            this.$axios.post(this.baseUrl+"RetriveQuizz").then(Response=>{
+                this.Quizz.CountOfUnSolved=Response.data.notSolved;
+                this.Quizz.CountOfSolved=Response.data.solved
+                // console.log(this.Quizz.CountOfUnSolved.length+this.Quizz.CountOfSolved.length)
+            })
+        },
  
+            }
      
  
  }

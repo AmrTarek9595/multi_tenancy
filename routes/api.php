@@ -75,6 +75,7 @@ Route::middleware([
 
  Route::post('/RetriveQuizz',[App\Http\Controllers\member_client::class, 'RetriveQuizz']); //لTrue Tested on postman
  Route::post('/GetQuiz/{id}',[App\Http\Controllers\member_client::class, 'GetQuiz']); //لTrue Tested on postman
+ Route::post('/PostQuizResutl/{id}',[App\Http\Controllers\member_client::class, 'PostQuizResutl']); //لTrue Tested on postman
 
 });
 

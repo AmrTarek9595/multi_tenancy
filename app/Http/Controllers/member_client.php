@@ -191,7 +191,8 @@ public function return_current_user_data(Request $request)
      return response()->json(["message"=>$data]);
     
 }
-public function AddQuiz(Request $request){
+public function AddQuiz(Request $request)
+{
     $data = Quiz::create(['nameOfQuiz' => $request->nameOfQuiz]);
 
     if (!is_array($request->question)) {
@@ -221,9 +222,12 @@ public function AddQuiz(Request $request){
     
         $question->answers()->saveMany($answers);
     }
-    
-     
+    $data->update(['ScoreOfQuiz' => count($questions)]);
 }
+
+
+
+
 public function ReturnAllQuizes(Request $request){
     
         $ReturnedQuizes=Quiz::orderBy('id','desc')->get();
@@ -375,24 +379,67 @@ public function DeleteStudent(Request $request,$id){
  * ******************Student Area*******************************************
  * *************************************************************************
  */
-public function RetriveQuizz(){
-    // if (Auth::user()->type==0)
-    // {       //Where not Solved yet in many-to-many Table
-        $user = Auth::user(); 
-        $userId = Auth::user()->id;
-        $NotSolved = Quiz::whereNotIn('id', function ($query) use ($userId) { $query->select('quiz_id') ->from('quiz_user') ->where('user_id', $userId); })->get();   
-        $Solved = Quiz::join('quiz_user', 'quizs.id', '=', 'quiz_user.quiz_id') ->where('quiz_user.user_id', $user->id) ->select('quizs.*', 'quiz_user.score') ->get(); 
-        return response()->json([ 'user' => $user, 'solved' => $Solved,'notSolved'=>$NotSolved ]);
+public function RetriveQuizz()
+{
+    if (Auth::user()->type == 0)
+    {
+        // Get the authenticated user
+        $user = Auth::user();
+        $userId = $user->id;
 
-        // return response()->json(["message"=>$Quizz]);
-    // }
+        // Retrieve quizzes that the user has not solved yet with the count of questions
+        $NotSolved = Quiz::withCount('question')->whereNotIn('id', function ($query) use ($userId) {
+            $query->select('quiz_id')
+                  ->from('quiz_user')
+                  ->where('user_id', $userId);
+        })->get();
+
+        
+        $Solved = Quiz::withCount('question')->join('quiz_user', 'quizs.id', '=', 'quiz_user.quiz_id')
+        ->where('quiz_user.user_id', $userId)
+        ->select('quizs.*', 'quiz_user.score')
+        ->select('quizs.*', 'quiz_user.created_at')
+        ->get();
+
+        // Calculate the total number of questions in solved and notSolved quizzes
+        $countSolvedQuestions = $Solved->count(); 
+
+        $notSolvedQuestionCount = $NotSolved->sum('question_count');
+
+        // Return the user, solved quizzes, notSolved quizzes, and their respective question counts in the JSON response
+        return response()->json([
+            
+            'solved' => $Solved,
+            'notSolved' => $NotSolved,
+        ]);
+    }
+
+    return response()->json(['message' => 'Unauthorized'], 401);
 }
 
-public function GetQuiz($id){
+
+
+public function GetQuiz($id)
+{
+
     $quiz = Quiz::with('Question.answers')->findOrFail($id); 
     return response()->json(["message" => $quiz]);
 }
 
+public function PostQuizResutl(Request $request, $id)
+{
+
+    // Find the user and the quiz
+    $userId = Auth::User()->id;
+    $user = User::find($userId);
+    $quiz = Quiz::find($id);
+    $score = $request->score;
+    // Attach the quiz to the user with a score
+    $user->quizzes()->attach($quiz->id, ['score' => $score]);
+    // Optionally, you can retrieve the updated quizzes for the user
+    $data = $user->quizzes;
+    return response()->json($data);
+}
 
 
 }
