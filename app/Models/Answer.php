@@ -13,4 +13,6 @@ class Answer extends Model
     {
         return $this->belongsTo(Question::class);
     }
+    protected $casts = [ 'created_at' => 'date:Y-m-d', ];
+
 }

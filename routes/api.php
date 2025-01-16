@@ -57,6 +57,7 @@ Route::middleware([
             ])->group(function () {
     Route::post('/login',[App\Http\Controllers\member_client::class, 'signin']); //لTrue Tested on postman
     Route::post('/logout',[App\Http\Controllers\member_client::class, 'logout']); //لTrue Tested on postman
+    Route::post('/create_admin',[App\Http\Controllers\member_client::class, 'create_admin']);//True Tested on postman
     Route::post('/create_user',[App\Http\Controllers\member_client::class, 'create_user']);//True Tested on postman
     Route::post('/return_current_user_data',[App\Http\Controllers\member_client::class, 'return_current_user_data']); //لTrue Tested on postman
     Route::post('/AddQuiz',[App\Http\Controllers\member_client::class, 'AddQuiz']); //لTrue Tested on postman

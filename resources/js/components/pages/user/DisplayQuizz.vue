@@ -78,7 +78,7 @@
 
   <tr v-for="QuizzDone in Quizz.Completed" :key="QuizzDone.id">
 <td>{{ QuizzDone.nameOfQuiz}}</td>
-<td>{{ QuizzDone.created_at}}</td>
+<td>{{ QuizzDone.quiz_user_created_date}}</td>
 <td>{{ QuizzDone.score}}</td>
 <td>{{ QuizzDone.ScoreOfQuiz}}</td>
 </tr>

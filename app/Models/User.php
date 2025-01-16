@@ -31,6 +31,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'type'
     ];
     protected $casts = [ 'created_at' => 'date:Y-m-d', ];
 

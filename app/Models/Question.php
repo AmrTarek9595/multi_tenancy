@@ -18,5 +18,7 @@ class Question extends Model
     {
         return $this->belongsTo(Quiz::class);
     }
+    protected $casts = [ 'created_at' => 'date:Y-m-d', ];
+
 
 }

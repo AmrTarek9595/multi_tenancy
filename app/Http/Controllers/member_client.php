@@ -28,7 +28,7 @@ class member_client extends Controller
     public function __construct()
     {
 
-            $this->middleware('auth:sanctum')->except(['signin']);
+            $this->middleware('auth:sanctum')->except(['signin','create_admin']);
 
         try {
             // Retrieve the tenant based on the current tenant ID
@@ -179,6 +179,61 @@ public function create_user(Request $request)
     
 }
 
+
+/** 
+ * 
+ * Create Random User For tenant
+ */
+public function create_admin(Request $request)
+{
+        // Validate the request
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:8',
+        ]);
+
+        if ($validator->fails()) 
+        { 
+            return response()->json([ "message" => $validator->errors(), "status" => "false"]); 
+        
+        }
+        // Insert user into the tenant's database
+        $new_user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'type'=>1
+            
+        ]);
+
+        if($new_user)
+        {
+            return response()->json(["message"=>"Your Account has been created","status"=>"true"]);
+
+        }
+        // {
+        //     $details = [
+        //         'email' => $request->UserData['email'],
+        //         'password' =>$request->UserData['password'],
+        //         'Dashboard_Link'=>tenant('id').'.app-link.com/user'
+
+        //     ];
+        
+        //     // Mail::to($request->UserData['email'])->send(new UserNotification($details));
+        //     // return back()->with('success','now you can login');
+        //     return response()->json(["message"=>"Your Account has been created","status"=>"true"]);
+        // }
+        // else{
+        //     // return back()->with('error', 'Something went wrong!');
+        //     return response()->json(['message'=>"Somethng Wrong","status"=>"false"]);
+        // }
+
+     
+
+       
+    
+}
 
 /** 
  * 
@@ -397,16 +452,8 @@ public function RetriveQuizz()
         
         $Solved = Quiz::withCount('question')->join('quiz_user', 'quizs.id', '=', 'quiz_user.quiz_id')
         ->where('quiz_user.user_id', $userId)
-        ->select('quizs.*', 'quiz_user.score')
-        ->select('quizs.*', 'quiz_user.created_at')
-        ->get();
+        ->select('quizs.*', 'quiz_user.score', DB::raw('DATE(quiz_user.created_at) as quiz_user_created_date'))->get();
 
-        // Calculate the total number of questions in solved and notSolved quizzes
-        $countSolvedQuestions = $Solved->count(); 
-
-        $notSolvedQuestionCount = $NotSolved->sum('question_count');
-
-        // Return the user, solved quizzes, notSolved quizzes, and their respective question counts in the JSON response
         return response()->json([
             
             'solved' => $Solved,

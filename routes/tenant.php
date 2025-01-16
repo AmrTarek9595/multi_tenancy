@@ -18,38 +18,8 @@ use Stancl\Tenancy\Middleware\PreventAccessFromCentralDomains;
 | Feel free to customize them however you want. Good luck!
 |
 */
-// Route::get('/', function () {
-//     return "sssss";
-// });
-// Route::middleware([
-//     'web',
-//     InitializeTenancyByDomain::class,
-//     PreventAccessFromCentralDomains::class,
-// ])->group(function () {
-//     Route::get('/', function () {
-//         // dd(\App\Models\User::all());
-//         return 'This is your multi-tenant application. The id of the current tenant is ' . tenant('id');
-//     }); 
-    
-//     Route::get('/adduser', function () {
-//         return view("auth.register");
-//     });
-//      Route::post('/register',[App\Http\Controllers\member_client::class, 'create_user']);
-
-//      Route::get('/login', function () {
-//         return view("auth.login");
-//     }); 
 
 
-//     Route::post('/signin',[App\Http\Controllers\member_client::class, 'signin'])->name('signin');
-
-
-    
-// });
-
-// Route::get('/', function () {
-//     return "sssss";
-// });
 // 'web',
 foreach (config('tenancy.central_domains') as $domain) {
     Route::domain($domain)->group(function () {
